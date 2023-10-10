@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 
 const reproductorSchema= new mongoose.Schema({
-    uri:{String,
-    required: true
+    uri:{   
+        type: String,
+        required: true
     },
     nombreReproductor:{
         type: String,

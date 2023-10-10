@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 
 const ratingSchema= new mongoose.Schema({
-    calificacion:{Number,
-    required: true
+    calificacion:{ 
+        type: Number,
+        required: true
     },
     idAnime:{
         type: mongoose.Schema.Types.ObjectId,

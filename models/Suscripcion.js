@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 
 const suscripcionSchema= new mongoose.Schema({
-    tipo:{String,
-    required: true
+    tipo:{
+        type: String,
+        required: true
     },
     costo:{
         type: Number,
