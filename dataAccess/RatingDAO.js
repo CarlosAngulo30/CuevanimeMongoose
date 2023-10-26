@@ -3,18 +3,18 @@ const Rating= require('../models/Rating')
 class RatingDAO{
     constructor(){};
     
-    static async crearRatingAnime(ratingData,idAnime,idUsuario){
+    static async crearRatingAnime(ratingData,idAnime){
         try {
-            const rating=new Rating(ratingData,idAnime,idUsuario)
+            const rating=new Rating(ratingData,idAnime)
             return await rating.save()
         } catch (error) {
             throw error
         }
     }
 
-    static async crearRatingPelicula(ratingData,idPelicula,idUsuario){
+    static async crearRatingPelicula(ratingData,idPelicula){
         try {
-            const rating=new Rating(ratingData,idPelicula,idUsuario)
+            const rating=new Rating(ratingData,idPelicula)
             return await rating.save()
         } catch (error) {
             throw error

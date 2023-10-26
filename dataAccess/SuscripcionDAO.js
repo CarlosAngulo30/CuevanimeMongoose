@@ -1,4 +1,4 @@
-const Suscripcion= require('../models/Suscripcion')
+const Suscripcion = require('../models/Suscripcion')
 
 class SuscripcionDAO{
     constructor(){};

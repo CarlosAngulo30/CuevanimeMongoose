@@ -8,12 +8,12 @@ const ratingSchema= new mongoose.Schema({
     idAnime:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Anime',
-        require:true
+        require:false
     },
     idPelicula:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Pelicula',
-        require:true
+        require:false
     },
     idUsuario:{
         type: mongoose.Schema.Types.ObjectId,

@@ -36,7 +36,7 @@ class UsuarioDAO{
         }
     }
 
-    static async obtenerUsuarios(limit=10){
+    static async obtenerUsuarios(limit){
         try {
             return await Usuario.find().limit(limit)
         } catch (error) {
