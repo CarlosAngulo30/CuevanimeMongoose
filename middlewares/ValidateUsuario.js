@@ -9,6 +9,14 @@ function validateCrearUsuario(req, res, next) {
     next()
 }
 
+function validateLogin(req, res, next) {
+    const { nickname, password} = req.body
+    if (!nickname || !password) {
+        return res.status(400).json({ message: "Los campos nickname, password son obligatorios" })
+    }
+    next()
+}
+
 function validateUsuarioId(req, res, next) {
     try {
         const Usuario = UsuarioDAO.obtenerUsuarioPorId(new mongoose.Types.ObjectId(req.params.id));
@@ -45,5 +53,6 @@ function validateActualizarUsuario(req, res, next) {
 module.exports = {
     validateCrearUsuario,
     validateActualizarUsuario,
-    validateUsuarioId
+    validateUsuarioId,
+    validateLogin
 }

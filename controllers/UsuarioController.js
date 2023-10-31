@@ -12,6 +12,25 @@ class UsuarioController{
         }
     }
 
+    static async login(req, res) {
+        if(!UsuarioDAO.login(req.body)){
+            res.status(500).json({
+                message: 'Error al iniciar sesión'
+            })
+        }
+        try{
+            const user = req.body
+            const token = await jwt.generarToken(req.body)
+            res.set('authorization', `Bearer ${token}`)
+            res.status(200).json({user})
+        } catch(error){
+            res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+
+
     static async obtenerUsuarioPorId(req, res, next){
         try {
             const id = req.params.id

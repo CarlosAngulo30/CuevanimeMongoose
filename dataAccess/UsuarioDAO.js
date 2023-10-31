@@ -14,6 +14,21 @@ class UsuarioDAO{
         }
     }
 
+    static async login(nickname, password) {
+        try {
+            const usuario = await Usuario.findOne({ nickname });
+            if (!usuario) {
+              throw new Error('Usuario no encontrado');
+            }
+            if (usuario.password !== password) {
+              throw new Error('Contraseña incorrecta');
+            }
+            return usuario;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     static async obtenerUsuarioPorId(id){
         try {
             return await Usuario.findById(id)
