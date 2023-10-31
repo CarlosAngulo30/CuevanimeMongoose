@@ -1,28 +1,32 @@
 const UsuarioDAO = require('../dataAccess/UsuarioDAO')
+const jwt = require('../middlewares/verify-jwt')
 
 class UsuarioController{
-    static async crearUsuario(req, res, next){
+    static async crearUsuario(req, res){
         try {
             const usuarioData = req.body
             const usuario = await UsuarioDAO.crearUsuario(usuarioData)
             res.status(201).json(usuario)
         } catch (error) {
+            console.log(error.message)
             res.status(error.statusCode || 500).json({message:error.message})
         }
     }
 
     static async login(req, res) {
-        if(!UsuarioDAO.login(req.body)){
-            res.status(500).json({
-                message: 'Error al iniciar sesión'
-            })
-        }
+        const usuarioLogin = req.body
         try{
-            const user = req.body
-            const token = await jwt.generarToken(req.body)
+            if(!await UsuarioDAO.login(usuarioLogin)){
+                res.status(500).json({
+                    message: 'Error al iniciar sesión'
+                })
+            }
+            const user = usuarioLogin
+            const token = await jwt.generarToken(user)
             res.set('authorization', `Bearer ${token}`)
             res.status(200).json({user})
         } catch(error){
+            console.log("ea")
             res.status(500).json({
                 message: error.message
             })

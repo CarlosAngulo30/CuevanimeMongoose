@@ -2,8 +2,8 @@ const mongoose = require("mongoose")
 const animeDAO = require('../dataAccess/AnimeDAO')
 
 function validateCrearAnime(req, res, next){
-    const {nombre, sinopsis, temporada, numeroCapitulo} = req.body
-    if(!nombre || !sinopsis || !temporada || !numeroCapitulo ){
+    const {nombre, sinopsis, temporada, numerocapitulo} = req.body
+    if(!nombre || !sinopsis || !temporada || !numerocapitulo ){
         return res.status(400).json({message: "Los campos nombre, sinopsis, temporada, numeroCapitulo son obligatorios"})
     } 
     next()

@@ -6,6 +6,4 @@ class NoDataFoundError extends Error{
     }
 }
 
-module.exports = {
-    NoDataFoundError
-}
+module.exports =  NoDataFoundError

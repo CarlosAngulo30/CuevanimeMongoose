@@ -10,6 +10,7 @@ class AnimeDAO{
             const anime=new Anime(animeData)
             return await anime.save()
         } catch (error) {
+            console.log(error)
             throw new DataAccessError("Se ha producido un problema al crear el anime")
         }
     }

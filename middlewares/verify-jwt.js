@@ -5,8 +5,8 @@ dotenv.config();
 async function generarToken(user){
     try{
         const payload = {
-            nickname: req.nickname,
-            email: req.email
+            nickname: user.nickname,
+            email: user.email
         }
         const token = await jwt.sign( payload, process.env.SECRETKEY, {expiresIn: '1h'})
         return token;

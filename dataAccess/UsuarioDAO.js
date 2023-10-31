@@ -10,22 +10,24 @@ class UsuarioDAO{
             const usuario=new Usuario(usuarioData)
             return await usuario.save()
         } catch (error) {
+            console.log(error)
             throw new DataAccessError("Se ha producido un problema al crear al usuario")
         }
     }
 
-    static async login(nickname, password) {
+    static async login(usuarioData) {
+        const {nickname, password} = usuarioData
         try {
             const usuario = await Usuario.findOne({ nickname });
             if (!usuario) {
-              throw new Error('Usuario no encontrado');
+              throw new DataAccessError('Usuario no encontrado');
             }
             if (usuario.password !== password) {
-              throw new Error('Contraseña incorrecta');
+              throw new DataAccessError('Contraseña incorrecta');
             }
             return usuario;
         } catch (error) {
-            throw error;
+            throw new NoDataFoundError("Se ha producido un problema al obtener el usuario")
         }
     }
 
