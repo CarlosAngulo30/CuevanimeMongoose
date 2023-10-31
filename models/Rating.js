@@ -1,19 +1,12 @@
 const mongoose = require('mongoose')
 
 const ratingSchema= new mongoose.Schema({
-    calificacion:{Number,
-    required: true
+    calificacion:{ 
+        type: Number,
+        required: true
     },
-    idAnime:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Anime',
-        require:true
-    },
-    idPelicula:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Pelicula',
-        require:true
-    },
+    contentType: { type: String, required: true },
+    contentId: { type: mongoose.Schema.Types.ObjectId, refPath: 'contentType' },
     idUsuario:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Usuario',

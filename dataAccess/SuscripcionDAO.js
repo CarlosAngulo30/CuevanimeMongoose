@@ -1,4 +1,6 @@
-const Suscripcion= require('../models/Suscripcion')
+const Suscripcion = require('../models/Suscripcion')
+const DataAccessError = require('../errors/DataAccessError')
+const NoDataFoundError = require('../errors/NoDataFoundError')
 
 class SuscripcionDAO{
     constructor(){};
@@ -8,7 +10,7 @@ class SuscripcionDAO{
             const suscripcion=new Suscripcion(suscripcionData)
             return await suscripcion.save()
         } catch (error) {
-            throw error
+            throw new DataAccessError("Se ha producido un problema al crear la suscripcion")
         }
     }
 
@@ -16,7 +18,7 @@ class SuscripcionDAO{
         try {
             return await Suscripcion.findById(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener la suscripcion")
         }
     }
 
@@ -24,7 +26,7 @@ class SuscripcionDAO{
         try {
             return Suscripcion.findByIdAndUpdate(id,suscripcionData,{new:true})
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al actualizar la suscripcion")
         }
     }
 
@@ -32,7 +34,7 @@ class SuscripcionDAO{
         try {
             return Suscripcion.findByIdAndRemove(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al eliminar la suscripcion")
         }
     }
 
@@ -40,7 +42,7 @@ class SuscripcionDAO{
         try {
             return await Suscripcion.find().limit(limit)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener todas las suscripciones")
         }
     }
 }

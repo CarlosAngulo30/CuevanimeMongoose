@@ -1,23 +1,16 @@
 const Rating= require('../models/Rating')
+const DataAccessError = require('../errors/DataAccessError')
+const NoDataFoundError = require('../errors/NoDataFoundError')
 
 class RatingDAO{
     constructor(){};
     
-    static async crearRatingAnime(ratingData,idAnime,idUsuario){
+    static async crearRating(ratingData,contentId){
         try {
-            const rating=new Rating(ratingData,idAnime,idUsuario)
+            const rating=new Rating(ratingData,contentId)
             return await rating.save()
         } catch (error) {
-            throw error
-        }
-    }
-
-    static async crearRatingPelicula(ratingData,idPelicula,idUsuario){
-        try {
-            const rating=new Rating(ratingData,idPelicula,idUsuario)
-            return await rating.save()
-        } catch (error) {
-            throw error
+            throw new DataAccessError("Se ha producido un problema al crear el rating de " +ratingData.contentType )
         }
     }
 
@@ -25,7 +18,7 @@ class RatingDAO{
         try {
             return await Rating.findById(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener el rating")
         }
     }
 
@@ -33,7 +26,7 @@ class RatingDAO{
         try {
             return Rating.findByIdAndUpdate(id,ratingData,{new:true})
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al actualizar el rating")
         }
     }
 
@@ -41,7 +34,7 @@ class RatingDAO{
         try {
             return Rating.findByIdAndRemove(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al eliminar el rating")
         }
     }
 
@@ -49,7 +42,7 @@ class RatingDAO{
         try {
             return await Rating.find().limit(limit)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener todos los ratings")
         }
     }
 }

@@ -1,16 +1,13 @@
 const mongoose = require('mongoose')
 
 const animeSchema= new mongoose.Schema({
-    nombre:{String,
-    required: true
+    nombre:{
+        type: String,
+        required: true
     },
     sinopsis:{
         type: String,
         required: true,
-    },
-    calificacionPromedio:{
-        type: Number,
-        required:true
     },
     temporada:{
         type: Number,

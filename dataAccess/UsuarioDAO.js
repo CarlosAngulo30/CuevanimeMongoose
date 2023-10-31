@@ -1,4 +1,6 @@
 const Usuario= require('../models/Usuario')
+const DataAccessError = require('../errors/DataAccessError')
+const NoDataFoundError = require('../errors/NoDataFoundError')
 
 class UsuarioDAO{
     constructor(){};
@@ -8,7 +10,24 @@ class UsuarioDAO{
             const usuario=new Usuario(usuarioData)
             return await usuario.save()
         } catch (error) {
-            throw error
+            console.log(error)
+            throw new DataAccessError("Se ha producido un problema al crear al usuario")
+        }
+    }
+
+    static async login(usuarioData) {
+        const {nickname, password} = usuarioData
+        try {
+            const usuario = await Usuario.findOne({ nickname });
+            if (!usuario) {
+              throw new DataAccessError('Usuario no encontrado');
+            }
+            if (usuario.password !== password) {
+              throw new DataAccessError('Contraseña incorrecta');
+            }
+            return usuario;
+        } catch (error) {
+            throw new NoDataFoundError("Se ha producido un problema al obtener el usuario")
         }
     }
 
@@ -16,7 +35,7 @@ class UsuarioDAO{
         try {
             return await Usuario.findById(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener el usuario")
         }
     }
 
@@ -24,7 +43,7 @@ class UsuarioDAO{
         try {
             return Usuario.findByIdAndUpdate(id,usuarioData,{new:true})
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al actualizar al usuario")
         }
     }
 
@@ -32,15 +51,15 @@ class UsuarioDAO{
         try {
             return Usuario.findByIdAndRemove(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al eliminar al usuario")
         }
     }
 
-    static async obtenerUsuarios(limit=10){
+    static async obtenerUsuarios(limit){
         try {
             return await Usuario.find().limit(limit)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener todos los usuarios")
         }
     }
 }
