@@ -1,69 +1,54 @@
 const ReproductorDAO = require('../dataAccess/ReproductorDAO')
-const {AppError} = require('../utils/appError')
 
 class ReproductorController{
-    static async crearReproductor(req, res, next){
+    static async crearReproductor(req, res){
         try {
-            const {uri, nombreReproductor, idAnime, idPelicula} = req.body
-            if(!uri || !nombreReproductor || !idAnime || idPelicula ){
-                next(new AppError('Los campos uri, nombreReproductor, idAnime, idPelicula son obligatorios',500))
-            }
-            const reproductorData = {uri, nombreReproductor, idAnime, idPelicula}
+            const reproductorData = req.body
             const reproductor = await ReproductorDAO.crearReproductor(reproductorData)
             res.status(201).json(reproductor)
         } catch (error) {
-            next(new AppError('Error al crear el Reproductor',500))
+            res.status(error.statusCode).json({message:error.message})
         }
     }
 
-    static async obtenerReproductorPorId(req, res, next){
+    static async obtenerReproductorPorId(req, res){
         try {
             const id = req.params.id
             const reproductor = await ReproductorDAO.obtenerReproductorPorId(id)
-            if(!reproductor){
-                next(new AppError('No se encontro el Reproductor',404))
-            }
             res.status(200).json(reproductor)
         } catch (error) {
-            next(new AppError('No se logro obtener el Reproductor',404)) 
+            res.status(error.statusCode).json({message:error.message})
         }
     }
 
-    static async actualizarReproductor(req, res, next){
+    static async actualizarReproductor(req, res ){
         try {
             const id = req.params.id
             const reproductorData = req.body
             const reproductor = await ReproductorDAO.actualizarReproductor(id, reproductorData)
-            if(!reproductor){
-                next(new AppError('No se encontro el Reproductor',404))
-            }
-            res.status(200).json(Reproductor)
+            res.status(200).json(reproductor)
         } catch (error) {
-            next(new AppError('Error al actualizar el Reproductor',500)) 
+            res.status(error.statusCode).json({message:error.message})
         }
     }
 
-    static async eliminarReproductor(req, res, next){
+    static async eliminarReproductor(req, res ){
         try {
             const id = req.params.id
-            const reproductorData = req.body
             const reproductor = await ReproductorDAO.eliminarReproductor(id)
-            if(!reproductor){
-                next(new AppError('No se encontro el Reproductor',404))
-            }
-            res.status(200).json({message: 'Reproductor eliminado correctamente'})
+            res.status(200).json({message: 'Reproductor '+reproductor.nombreReproductor+' eliminado correctamente'})
         } catch (error) {
-            next(new AppError('Error al eliminar el Reproductor',500)) 
+            res.status(error.statusCode).json({message:error.message})
         }
     }
 
-    static async obtenerReproductors(req, res, next){
+    static async obtenerReproductors(req, res ){
         try {
             const limit = req.params.limit || 10
             const reproductors = await ReproductorDAO.obtenerReproductors(limit)
             res.status(200).json(reproductors)
         } catch (error) {
-            next(new AppError('No se logro obtener los Reproductores',500)) 
+            res.status(error.statusCode).json({message:error.message})
         }
     }
 }

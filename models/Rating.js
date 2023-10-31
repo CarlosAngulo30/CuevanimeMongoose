@@ -5,16 +5,8 @@ const ratingSchema= new mongoose.Schema({
         type: Number,
         required: true
     },
-    idAnime:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Anime',
-        require:false
-    },
-    idPelicula:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Pelicula',
-        require:false
-    },
+    contentType: { type: String, required: true },
+    contentId: { type: mongoose.Schema.Types.ObjectId, refPath: 'contentType' },
     idUsuario:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Usuario',

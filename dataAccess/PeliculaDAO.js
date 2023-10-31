@@ -1,4 +1,7 @@
 const Pelicula= require('../models/Pelicula')
+const DataAccessError = require('../errors/dataAccessError')
+const NoDataFoundError = require('../errors/NoDataFoundError')
+const ValidationError = require('../errors/ValidationError')
 
 class PeliculaDAO{
     constructor(){};
@@ -8,7 +11,7 @@ class PeliculaDAO{
             const pelicula=new Pelicula(peliculaData)
             return await pelicula.save()
         } catch (error) {
-            throw error
+            throw new DataAccessError("Se ha producido un problema al crear la pelicula")
         }
     }
 
@@ -16,7 +19,7 @@ class PeliculaDAO{
         try {
             return await Pelicula.findById(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener la pelicula")
         }
     }
 
@@ -24,7 +27,7 @@ class PeliculaDAO{
         try {
             return Pelicula.findByIdAndUpdate(id,peliculaData,{new:true})
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al actualizar la pelicula")
         }
     }
 
@@ -32,7 +35,7 @@ class PeliculaDAO{
         try {
             return Pelicula.findByIdAndRemove(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al eliminar la pelicula")
         }
     }
 
@@ -40,7 +43,7 @@ class PeliculaDAO{
         try {
             return await Pelicula.find().limit(limit)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener todas las peliculas")
         }
     }
 }

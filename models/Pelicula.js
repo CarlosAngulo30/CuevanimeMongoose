@@ -8,10 +8,6 @@ const peliculaSchema= new mongoose.Schema({
     sinopsis:{
         type: String,
         required: true,
-    },
-    calificacionPromedio:{
-        type: Number,
-        required:true
     }
 })
 

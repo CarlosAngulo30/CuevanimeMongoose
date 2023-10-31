@@ -1,8 +1,7 @@
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const {globalHandlerError, AppError} = require('./utils/appError')
+const bodyParser = require('body-parser')
 require('dotenv').config({path: './variables.env'})
 const db = require('./config/db')
 
@@ -25,11 +24,9 @@ app.use('/api/sucripcions', SuscripcionRouter)
 const UsuarioRouter = require('./routes/UsuarioRouter')
 app.use('/api/usuarios', UsuarioRouter)
 
-app.all('*', (req, res, next)=>{
-    next(new AppError('No se pudo acceder a la ruta especificada', 404))
+app.use((req, res)=>{
+    res.status(400).send("Ruta no encontrada")
 })
-
-app.use(globalHandlerError)
 
 const port = process.env.PORT || 3000
 

@@ -1,69 +1,54 @@
 const AnimeDAO = require('../dataAccess/AnimeDAO')
-const {AppError} = require('../utils/appError')
 
 class AnimeController{
-    static async crearAnime(req, res, next){
+    static async crearAnime(req, res){
         try {
-            const {nombre, sinopsis, calificacionPromedio, temporada, numeroCapitulo} = req.body
-            if(!nombre || !sinopsis || !calificacionPromedio || !temporada || !numeroCapitulo ){
-                next(new AppError('Los campos nombre, sinopsis, calificacionPromedio, temporada, numeroCapitulo son obligatorios',500))
-            }
-            const animeData = {nombre, sinopsis, calificacionPromedio, temporada, numeroCapitulo}
+            const animeData = req.body
             const anime = await AnimeDAO.crearAnime(animeData)
             res.status(201).json(anime)
         } catch (error) {
-            next(new AppError('Error al crear el anime',500))
+            res.status(error.statusCode).json({message:error.message})
         }
     }
 
-    static async obtenerAnimePorId(req, res, next){
+    static async obtenerAnimePorId(req, res){
         try {
             const id = req.params.id
             const anime = await AnimeDAO.obtenerAnimePorId(id)
-            if(!anime){
-                next(new AppError('No se encontro el anime',404))
-            }
             res.status(200).json(anime)
         } catch (error) {
-            next(new AppError('No se logro obtener el anime',404)) 
+            res.status(error.statusCode).json({message:error.message}) 
         }
     }
 
-    static async actualizarAnime(req, res, next){
+    static async actualizarAnime(req, res){
         try {
             const id = req.params.id
             const animeData = req.body
             const anime = await AnimeDAO.actualizarAnime(id, animeData)
-            if(!anime){
-                next(new AppError('No se encontro el Anime',404))
-            }
             res.status(200).json(anime)
         } catch (error) {
-            next(new AppError('Error al actualizar el Anime',500)) 
+            res.status(error.statusCode).json({message:error.message}) 
         }
     }
 
-    static async eliminarAnime(req, res, next){
+    static async eliminarAnime(req, res){
         try {
             const id = req.params.id
-            const animeData = req.body
             const anime = await AnimeDAO.eliminarAnime(id)
-            if(!anime){
-                next(new AppError('No se encontro el Anime',404))
-            }
-            res.status(200).json({message: 'Anime eliminado correctamente'})
+            res.status(200).json({message: 'Anime '+anime.nombre+' eliminado correctamente'})
         } catch (error) {
-            next(new AppError('Error al eliminar el Anime',500)) 
+            res.status(error.statusCode).json({message:error.message}) 
         }
     }
 
-    static async obtenerAnimes(req, res, next){
+    static async obtenerAnimes(req, res){
         try {
             const limit = req.params.limit || 10
             const animes = await AnimeDAO.obtenerAnimes(limit)
             res.status(200).json(animes)
         } catch (error) {
-            next(new AppError('No se logro obtener los Animes',500)) 
+            res.status(error.statusCode).json({message:error.message}) 
         }
     }
 }

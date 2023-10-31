@@ -1,4 +1,6 @@
-const Anime= require('../models/Anime')
+const Anime = require('../models/Anime')
+const DataAccessError = require('../errors/dataAccessError')
+const NoDataFoundError = require('../errors/NoDataFoundError')
 
 class AnimeDAO{
     constructor(){};
@@ -8,7 +10,7 @@ class AnimeDAO{
             const anime=new Anime(animeData)
             return await anime.save()
         } catch (error) {
-            throw error
+            throw new DataAccessError("Se ha producido un problema al crear el anime")
         }
     }
 
@@ -16,7 +18,7 @@ class AnimeDAO{
         try {
             return await Anime.findById(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener el anime")
         }
     }
 
@@ -24,7 +26,7 @@ class AnimeDAO{
         try {
             return Anime.findByIdAndUpdate(id,animeData,{new:true})
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al actualizar el anime")
         }
     }
 
@@ -32,7 +34,7 @@ class AnimeDAO{
         try {
             return Anime.findByIdAndRemove(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al eliminar el anime")
         }
     }
 
@@ -40,9 +42,9 @@ class AnimeDAO{
         try {
             return await Anime.find().limit(limit)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener todos los animes")
         }
     }
 }
 
-module.exports = AnimeDAO;
+module.exports = AnimeDAO

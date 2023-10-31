@@ -9,10 +9,6 @@ const animeSchema= new mongoose.Schema({
         type: String,
         required: true,
     },
-    calificacionPromedio:{
-        type: Number,
-        required:true
-    },
     temporada:{
         type: Number,
         required:true

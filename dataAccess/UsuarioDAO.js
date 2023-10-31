@@ -1,4 +1,6 @@
 const Usuario= require('../models/Usuario')
+const DataAccessError = require('../errors/dataAccessError')
+const NoDataFoundError = require('../errors/NoDataFoundError')
 
 class UsuarioDAO{
     constructor(){};
@@ -8,7 +10,7 @@ class UsuarioDAO{
             const usuario=new Usuario(usuarioData)
             return await usuario.save()
         } catch (error) {
-            throw error
+            throw new DataAccessError("Se ha producido un problema al crear al usuario")
         }
     }
 
@@ -16,7 +18,7 @@ class UsuarioDAO{
         try {
             return await Usuario.findById(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener el usuario")
         }
     }
 
@@ -24,7 +26,7 @@ class UsuarioDAO{
         try {
             return Usuario.findByIdAndUpdate(id,usuarioData,{new:true})
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al actualizar al usuario")
         }
     }
 
@@ -32,7 +34,7 @@ class UsuarioDAO{
         try {
             return Usuario.findByIdAndRemove(id)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al eliminar al usuario")
         }
     }
 
@@ -40,7 +42,7 @@ class UsuarioDAO{
         try {
             return await Usuario.find().limit(limit)
         } catch (error) {
-            throw error
+            throw new NoDataFoundError("Se ha producido un problema al obtener todos los usuarios")
         }
     }
 }
