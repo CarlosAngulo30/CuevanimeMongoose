@@ -3,10 +3,10 @@ const router = express.Router()
 const ReproductorController = require('../controllers/ReproductorController')
 const ReproductorMiddleware = require('../middlewares/ValidateReproductor')
 
-router.post('/', ReproductorMiddleware.validateCrearReproductorAnime, ReproductorController.crearReproductor)
-router.get('/:id', ReproductorController.obtenerReproductorPorId)
-router.put('/:id', ReproductorController.actualizarReproductor)
-router.delete('/:id', ReproductorController.eliminarReproductor)
+router.post('/', ReproductorMiddleware.validateCrearReproductor, ReproductorController.crearReproductor)
+router.get('/:id', ReproductorMiddleware.validateReproductorId, ReproductorController.obtenerReproductorPorId)
+router.put('/:id', ReproductorMiddleware.validateActualizarReproductor, ReproductorController.actualizarReproductor)
+router.delete('/:id',ReproductorMiddleware.validateReproductorId, ReproductorController.eliminarReproductor)
 router.get('/', ReproductorController.obtenerReproductors)
 
 module.exports = router

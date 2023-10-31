@@ -1,5 +1,5 @@
 const Reproductor= require('../models/Reproductor')
-const DataAccessError = require('../errors/dataAccessError')
+const DataAccessError = require('../errors/DataAccessError')
 const NoDataFoundError = require('../errors/NoDataFoundError')
 
 class ReproductorDAO{

@@ -1,5 +1,4 @@
 const SuscripcionDAO = require('../dataAccess/SuscripcionDAO')
-const {AppError} = require('../utils/appError')
 
 class SuscripcionController{
     static async crearSuscripcion(req, res){

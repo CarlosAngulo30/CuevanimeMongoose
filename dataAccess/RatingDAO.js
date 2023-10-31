@@ -1,5 +1,5 @@
 const Rating= require('../models/Rating')
-const DataAccessError = require('../errors/dataAccessError')
+const DataAccessError = require('../errors/DataAccessError')
 const NoDataFoundError = require('../errors/NoDataFoundError')
 
 class RatingDAO{

@@ -1,5 +1,5 @@
 const Pelicula= require('../models/Pelicula')
-const DataAccessError = require('../errors/dataAccessError')
+const DataAccessError = require('../errors/DataAccessError')
 const NoDataFoundError = require('../errors/NoDataFoundError')
 const ValidationError = require('../errors/ValidationError')
 

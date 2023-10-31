@@ -1,4 +1,4 @@
-class dataAccessError extends Error{
+class DataAccessError extends Error{
     constructor(message){
         super(message)
         this.name = "DataAccessError"
@@ -6,6 +6,4 @@ class dataAccessError extends Error{
     }
 }
 
-module.exports = {
-    dataAccessError
-}
+module.exports = DataAccessError

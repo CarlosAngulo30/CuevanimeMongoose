@@ -3,7 +3,7 @@ const UsuarioDAO = require('../dataAccess/UsuarioDAO')
 
 function validateCrearUsuario(req, res, next) {
     const { nickname, password, idsucripcion } = req.body
-    if (!nickname || !password || !idsucripcion) {
+    if (!nickname || !password) {
         return res.status(400).json({ message: "Los campos nickname, password y suscripcion son obligatorios" })
     }
     next()

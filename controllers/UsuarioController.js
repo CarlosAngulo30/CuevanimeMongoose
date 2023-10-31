@@ -1,5 +1,4 @@
 const UsuarioDAO = require('../dataAccess/UsuarioDAO')
-const {AppError} = require('../utils/appError')
 
 class UsuarioController{
     static async crearUsuario(req, res, next){
@@ -8,7 +7,7 @@ class UsuarioController{
             const usuario = await UsuarioDAO.crearUsuario(usuarioData)
             res.status(201).json(usuario)
         } catch (error) {
-            res.status(error.statusCode).json({message:error.message})
+            res.status(error.statusCode || 500).json({message:error.message})
         }
     }
 
