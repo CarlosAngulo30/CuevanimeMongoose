@@ -2,11 +2,10 @@ const mongoose = require("mongoose");
 const animeDAO = require("../dataAccess/AnimeDAO");
 
 function validateCrearAnime(req, res, next) {
-  const { nombre, sinopsis, temporada, numerocapitulo, imagenes } = req.body;
-  if (!nombre || !sinopsis || !temporada || !numerocapitulo || !imagenes) {
+  const { nombre, sinopsis, imagenes } = req.body;
+  if (!nombre || !sinopsis || !imagenes) {
     return res.status(400).json({
-      message:
-        "Los campos nombre, sinopsis, temporada, numeroCapitulo e imagenes son obligatorios",
+      message: "Los campos nombre, sinopsis e imagenes son obligatorios",
     });
   }
   next();
@@ -41,11 +40,10 @@ function validateActualizarAnime(req, res, next) {
   } catch (error) {
     return res.status(400).json({ message: "El id no es valido" });
   }
-  const { nombre, sinopsis, temporada, numeroCapitulo, imagenes } = req.body;
-  if (!nombre || !sinopsis || !temporada || !numeroCapitulo || !imagenes) {
+  const { nombre, sinopsis, imagenes } = req.body;
+  if (!nombre || !sinopsis || !imagenes) {
     return res.status(400).json({
-      message:
-        "Los campos nombre, sinopsis, temporada, numeroCapitulo e imagenes son obligatorios",
+      message: "Los campos nombre, sinopsis e imagenes son obligatorios",
     });
   }
   next();
