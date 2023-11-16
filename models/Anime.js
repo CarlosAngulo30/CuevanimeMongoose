@@ -9,14 +9,20 @@ const animeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  temporada: {
-    type: Number,
-    required: true,
-  },
-  numerocapitulo: {
-    type: Number,
-    required: true,
-  },
+  mediaContent: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "MediaContent",
+      required: false,
+    },
+  ],
+  temporadas: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Temporada",
+      required: false,
+    },
+  ],
   imagenes: {
     bannerHorizontal: {
       type: String,
