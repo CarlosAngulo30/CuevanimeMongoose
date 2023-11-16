@@ -1,6 +1,6 @@
 const Temporada = require("../models/Temporada");
-const DataAccessError = require("./DataAccessError");
-const NoDataFoundError = require("./NoDataFoundError");
+const DataAccessError = require("../errors/DataAccessError");
+const NoDataFoundError = require("../errors/NoDataFoundError");
 
 class TemporadaDAO {
   constructor() {}

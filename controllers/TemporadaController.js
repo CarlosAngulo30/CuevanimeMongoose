@@ -1,4 +1,4 @@
-const TemporadaDAO = require("../models/TemporadaDAO");
+const TemporadaDAO = require("../dataAccess/TemporadaDAO");
 
 class TemporadaController {
   static async crearTemporada(req, res) {

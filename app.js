@@ -12,12 +12,13 @@ db.conectar();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan("combined"));
-
 //Endpoints
 const AnimeRouter = require("./routes/AnimeRouter");
 app.use("/api/animes", AnimeRouter);
 const MediaContentRouter = require("./routes/MediaContentRouter");
 app.use("/api/mediaContents", MediaContentRouter);
+const TemporadaRouter = require("./routes/TemporadaRouter");
+app.use("/api/temporadas", TemporadaRouter);
 const PeliculaRouter = require("./routes/PeliculaRouter");
 app.use("/api/peliculas", jwt.verifyToken, PeliculaRouter);
 const RatingRouter = require("./routes/RatingRouter");

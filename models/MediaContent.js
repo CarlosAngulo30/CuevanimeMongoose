@@ -19,10 +19,12 @@ const mediaContentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  url: {
-    type: String,
-    required: true,
-  },
+  url: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   numeroCapitulo: {
     type: Number,
     required: true,
