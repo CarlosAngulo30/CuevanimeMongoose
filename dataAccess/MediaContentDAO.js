@@ -1,6 +1,7 @@
 const MediaContent = require("../models/MediaContent");
 const DataAccessError = require("../errors/DataAccessError");
 const NoDataFoundError = require("../errors/NoDataFoundError");
+const mongoose = require("mongoose");
 
 class MediaContentDAO {
   constructor() {}
@@ -36,12 +37,14 @@ class MediaContentDAO {
     }
   }
 
-  static async obtenerMediaContentsByIdAnime(idAnime) {
+  static async obtenerMediaContentsByIdAnime(id) {
     try {
-      return await MediaContent.find({ anime: idAnime });
+      return await MediaContent.find({
+        idAnime: new mongoose.Types.ObjectId(id),
+      });
     } catch (error) {
       throw new NoDataFoundError(
-        "Se ha producido un problema al obtener los mediaContents"
+        "Se ha producido un problema al obtener los mediaContents" + error
       );
     }
   }

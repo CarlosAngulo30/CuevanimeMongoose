@@ -34,9 +34,10 @@ class MediaContentController {
   }
 
   static async obtenerMediaContentsByIdAnime(req, res) {
+    console.log(req.params.id);
     try {
       const mediaContents = await MediaContentDAO.obtenerMediaContentsByIdAnime(
-        req.params.idAnime
+        req.params.id
       );
       res.status(200).json(mediaContents);
     } catch (error) {
