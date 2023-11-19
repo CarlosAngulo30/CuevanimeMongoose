@@ -9,6 +9,10 @@ const animeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  genero: {
+    type: String,
+    required: true,
+  },
   temporadas: [
     {
       type: mongoose.Schema.Types.ObjectId,
