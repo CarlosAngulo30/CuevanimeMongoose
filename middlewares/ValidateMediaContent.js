@@ -70,8 +70,10 @@ function validateActualizarMediaContent(req, res, next) {
 
 function validateObtenerMediaContentsByIdAnime(req, res, next) {
   try {
-    const idAnime = new mongoose.Types.ObjectId(req.body.idAnime);
-    const anime = AnimeDAO.obtenerAnime(new mongoose.Types.ObjectId(idAnime));
+    const idAnime = new mongoose.Types.ObjectId(req.params.id);
+    const anime = AnimeDAO.obtenerAnimePorId(
+      new mongoose.Types.ObjectId(idAnime)
+    );
     if (!anime) {
       return res.status(404).json({ message: "No existe un anime con ese id" });
     }
