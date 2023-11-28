@@ -8,18 +8,18 @@ router.post(
   MediaContentMiddleware.validateCrearMediaContent,
   MediaContentController.crearMediaContent
 );
-/* router.get(
+router.get(
   "/:id",
   MediaContentMiddleware.validateObtenerMediaContentById,
   MediaContentController.obtenerMediaContentById
-); */
+);
 router.put(
   "/:id",
   MediaContentMiddleware.validateActualizarMediaContent,
   MediaContentController.actualizarMediaContent
 );
 router.get(
-  "/:id",
+  "/anime/:id",
   MediaContentMiddleware.validateObtenerMediaContentsByIdAnime,
   MediaContentController.obtenerMediaContentsByIdAnime
 );
