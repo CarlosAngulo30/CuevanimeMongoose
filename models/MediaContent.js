@@ -10,6 +10,10 @@ const mediaContentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  img:{
+    type: String,
+    required: true,
+  },
   tipo: {
     type: String,
     enum: ["episodio", "pelicula"],
