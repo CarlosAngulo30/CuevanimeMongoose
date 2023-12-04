@@ -3,12 +3,13 @@ const MediaContentDAO = require("../dataAccess/MediaContentDAO");
 const AnimeDAO = require("../dataAccess/AnimeDAO");
 
 function validateCrearMediaContent(req, res, next) {
-  const { idAnime, title, tipo, descripcion, url, numeroCapitulo, temporada } =
+  const { idAnime, title, img, tipo, descripcion, url, numeroCapitulo, temporada } =
     req.body;
   if (
     !idAnime ||
     !title ||
     !tipo ||
+    !img ||
     !descripcion ||
     !url ||
     !numeroCapitulo ||
@@ -50,12 +51,13 @@ function validateActualizarMediaContent(req, res, next) {
   } catch (error) {
     return res.status(404).json({ message: "El id no es valido" });
   }
-  const { anime, title, tipo, descripcion, url, numeroCapitulo, temporada } =
+  const { anime, title, img, tipo, descripcion, url, numeroCapitulo, temporada } =
     req.body;
   if (
     !anime ||
     !title ||
     !tipo ||
+    !img ||
     !descripcion ||
     !url ||
     !numeroCapitulo ||
