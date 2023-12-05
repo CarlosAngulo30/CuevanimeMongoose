@@ -9,5 +9,6 @@ router.get('/:id', UsuarioMiddleware.validateUsuarioId,UsuarioController.obtener
 router.put('/:id', UsuarioMiddleware.validateActualizarUsuario,UsuarioController.actualizarUsuario)
 router.delete('/:id', UsuarioMiddleware.validateUsuarioId,UsuarioController.eliminarUsuario)
 router.get('/', UsuarioController.obtenerUsuarios)
+router.get('/logout',UsuarioController.logout)
 
 module.exports = router
