@@ -2,9 +2,9 @@ const mongoose = require("mongoose")
 const UsuarioDAO = require('../dataAccess/UsuarioDAO')
 
 function validateCrearUsuario(req, res, next) {
-    const { nickname, password, idsucripcion } = req.body
-    if (!nickname || !password || !idsucripcion) {
-        return res.status(400).json({ message: "Los campos nickname, password y suscripcion son obligatorios" })
+    const { nickname, password, email } = req.body
+    if (!nickname || !password || !email) {
+        return res.status(400).json({ message: "Los campos nickname, password y email son obligatorios" })
     }
     next()
 }
@@ -41,10 +41,6 @@ function validateActualizarUsuario(req, res, next) {
         }
     } catch (error) {
         return res.status(400).json({ message: "El id no es valido" })
-    }
-    const { nickname, password, email, idSuscripcion } = req.body
-    if (!nickname || !password || !email || !idSuscripcion) {
-        return res.status(400).json({ message: "Los campos nickname, password, email y suscripcion son obligatorios" })
     }
     next()
 }
