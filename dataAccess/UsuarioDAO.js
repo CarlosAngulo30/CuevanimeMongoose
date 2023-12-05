@@ -27,6 +27,9 @@ class UsuarioDAO{
             }
             return usuario;
         } catch (error) {
+            if (error.name === "DataAccessError") {
+                return null
+            }
             throw new NoDataFoundError("Se ha producido un problema al obtener el usuario")
         }
     }
