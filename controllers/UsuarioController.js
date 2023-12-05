@@ -16,20 +16,28 @@ class UsuarioController {
   static async login(req, res) {
     const usuarioLogin = req.body;
     try {
-      if (!(await UsuarioDAO.login(usuarioLogin))) {
-        res.status(500).json({
-          message: "Error al iniciar sesión",
+      const userLogin = await UsuarioDAO.login(usuarioLogin)
+      if (!userLogin) {
+        return res.status(400).json({
+          message: "Credenciales incorrectas",
         });
       }
-      const user = usuarioLogin;
-      const token = await jwt.generarToken(user);
+      const token = await jwt.generarToken(userLogin);
       res.cookie("authToken", token, { httpOnly: true });
-      res.status(200).json({ user });
+      res.status(200).json({ user: userLogin });
     } catch (error) {
       console.log("ea");
       res.status(500).json({
         message: error.message,
       });
+    }
+  }
+
+  static async logout(req, res) {
+    try {
+      res.clearCookie("authToken");
+    } catch (e) {
+      res.status(500).json("sucedio un error")
     }
   }
 
