@@ -56,7 +56,7 @@ class UsuarioController {
       const id = req.params.id;
       const usuarioData = req.body;
       const usuario = await UsuarioDAO.actualizarUsuario(id, usuarioData);
-      res.status(200).json(usuario);
+      res.status(200).json({user: usuario});
     } catch (error) {
       res.status(error.statusCode).json({ message: error.message });
     }
