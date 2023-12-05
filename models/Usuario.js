@@ -13,6 +13,10 @@ const usuarioSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  imagen: {
+    type: String,
+    required: false,
+  },
   idSuscripcion: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Suscripcion',
