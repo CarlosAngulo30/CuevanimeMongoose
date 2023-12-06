@@ -11,10 +11,7 @@ const cookieParser = require("cookie-parser");
 db.conectar();
 
 app.use(
-  cors({
-    origin: "http://localhost:5173/",
-    credentials: true,
-  })
+  cors()
 );
 app.use(cookieParser());
 app.use(bodyParser.json());
