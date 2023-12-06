@@ -18,8 +18,7 @@ const usuarioSchema = new mongoose.Schema({
     required: false,
   },
   idSuscripcion: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Suscripcion',
+    type: String,
     required: false,
   }
 });

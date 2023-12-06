@@ -62,6 +62,19 @@ class UsuarioController {
     }
   }
 
+  static async agregarSuscripcion(req, res, next){
+    try {
+      const id = req.params.id;
+      const usuarioData = req.body;
+      console.log("eaaeae")
+      const usuario = await UsuarioDAO.agregarSuscripcion(id, usuarioData);
+      console.log(usuario)
+      res.status(200).json({user: usuario});
+    } catch (error) {
+      res.status(error.statusCode).json({ message: error.message });
+    }
+  }
+
   static async eliminarUsuario(req, res, next) {
     try {
       const id = req.params.id;

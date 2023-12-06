@@ -7,6 +7,7 @@ router.post('/', UsuarioMiddleware.validateCrearUsuario, UsuarioController.crear
 router.post('/login', UsuarioMiddleware.validateLogin, UsuarioController.login)
 router.get('/:id', UsuarioMiddleware.validateUsuarioId,UsuarioController.obtenerUsuarioPorId)
 router.put('/:id', UsuarioMiddleware.validateActualizarUsuario,UsuarioController.actualizarUsuario)
+router.put('/suscripcion/:id', UsuarioMiddleware.validateActualizarUsuario,UsuarioController.agregarSuscripcion)
 router.delete('/:id', UsuarioMiddleware.validateUsuarioId,UsuarioController.eliminarUsuario)
 router.get('/', UsuarioController.obtenerUsuarios)
 router.get('/logout',UsuarioController.logout)

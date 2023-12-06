@@ -50,6 +50,14 @@ class UsuarioDAO{
         }
     }
 
+    static async agregarSuscripcion(id,usuarioData){
+        try {
+            return Usuario.findByIdAndUpdate(id,usuarioData,{new:true})
+        } catch (error) {
+            throw new NoDataFoundError("Se ha producido un problema al actualizar al usuario")
+        }
+    }
+
     static async eliminarUsuario(id){
         try {
             return Usuario.findByIdAndRemove(id)

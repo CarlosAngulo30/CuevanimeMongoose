@@ -3,7 +3,7 @@ const SuscripcionDAO = require('../dataAccess/SuscripcionDAO')
 class SuscripcionController{
     static async crearSuscripcion(req, res){
         try {
-            const suscripcionData = {uri, nombreSuscripcion, idAnime, idPelicula}
+            const suscripcionData = {uri, nombreSuscripcion}
             const suscripcion = await SuscripcionDAO.crearSuscripcion(suscripcionData)
             res.status(201).json(suscripcion)
         } catch (error) {
